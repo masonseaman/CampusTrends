@@ -1,0 +1,26 @@
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+h1 {
+	text-align: center;
+	font-family: Arial Bold, sans-serif;
+}
+
+h1+p {
+	text-align: justify;
+	font-style: italic;
+	padding-left: 15%;
+	padding-right: 15%;
+}
+
+.search {
+	margin: 0 auto;
+	text-align: center;
+}
+
+footer+p {
+	text-align: right;
+	font-size: 75%;
+}
