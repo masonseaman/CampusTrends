@@ -26,3 +26,7 @@ input[type=text], input[type=password] {
 input[type=placeholder]{
   font-family: sans-serif
 }
+
+.home{
+  text-align: center
+}
