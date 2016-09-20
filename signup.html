@@ -9,17 +9,22 @@
 <body>
 	<h1> Sign up for an account here! </h1>
 	
-	<form>
-		First name:
-		<input type="text" name="firstname"><br>
-		Last name:
-		<input type="text" name="lastname"><br>
-		Email:
-		<input type="email" name="emailaddress"><br>
-		Birthdate:
-		<input type="date" name="birthdate">
-		<p><button>Submit</button></p>
-	</form>
+    <div>
+ 		First name:
+ 		<input id ="first" type="text" name="firstname"><br>
+ 		Last name:
+ 		<input id = "last" type="text" name="lastname"><br>
+ 		Email:
+ 		<input id = "email" type="email" name="emailaddress"><br>
+ 		Birthdate:
+ 		<input type="date" name="birthdate">
+ 		<p><button id = "submit">Submit</button></p>
+ 	</div>
+ 	
+     <div>
+         <p id="name">
+         </p>
+     </div>
 	
 	<table>
 	<div class="box"> <b>Contact information</b> </div><br>
@@ -39,4 +44,17 @@
 	<br><a href="index.html">Home</a><br>
 	<a href="login.html">Sign in now!</a>
 
+    <script>
+     "use strict";
+         
+     document.getElementById('submit').addEventListener("click", write);
+     function write()
+     {
+         var first = document.getElementById('first').value;
+         var last = document.getElementById('last').value;
+         var email = document.getElementById('email').value;
+         var name = document.getElementById('name');
+         name.innerHTML = "Your name is: " + first + " " + last + ". " + "Your Email is: " + email + ".";
+     }
+     </script>
 </body>
