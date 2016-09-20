@@ -13,6 +13,6 @@ function show()
 {
 	for(var trend of trends)
 	{
-		$('#trendsListDisplay').append('<div> Trend: ' + trend.name + 'Coordinates: ' + trend.coordinates);
+		$('#trend_table').append('<tr> <td> Trend: ' + trend.name + '</td> <td> Coordinates: ' + trend.coordinates + '</td> </tr> ');
 	}
 }
