@@ -1,75 +1,131 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-	<link rel="stylesheet" type="text/css" href="Main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
+<head>
+
+	<link rel="stylesheet" type="text/css" href="Main.css">
+
+	
+
 	<meta charset="utf-8">
+
 	<title>CampusTrends</title>
+
+	<div id="creator1" data-creator1="Mason Seaman"></div>
+	<div id="creator2" data-creator2="Daniel Morgenthal"></div>
+	
 </head> 	
+
 <div>
+
 	<p>
+
 		<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
+
 		<h1>CampusTrends</h1>
+
 			<p>
+
 				<text>
+
 					CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
+
 				</text>
+
 			</p>
+
 	</p>
+
 </div>
+
+
 
 <div class=search>
+
 	<p> <input size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
+
 	<p><button>Search</button></p>
+	<p><button id="show">Show Trends</button></p>
 </div>
+
+	
+
+
+
+<table id="myTable">
+	<tr>
+		<th>
+			Trend
+		</th>
+		<th>
+			Coordinates
+		<th>
+	</tr>
+</table>
 
 <script>
-		"use strict";
+	"use strict";
+	
 	var trends = [
+
 				{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
+
 				{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
+
 				{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
+
 				{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
+
 				{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
 			];
-			
-	document.getElementById('show').addEventListener("click", show);
 
-	function show()
+			
+
+	document.getElementById('show').addEventListener("click", myFunction);
+
+
+
+	function myFunction()
+
 	{
+
 		for(var trend of trends)
+
 		{
-			$('#table').append('<tr> <td> Trend: ' + trend.name + '</td> <td> Coordinates: ' + trend.coordinates + '</td> </tr> ');
+			$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
 		}
+
 	}
+
 </script>
 
-<div class=show>
-	<p><button id=show>Show Trends</button></p>
-</div>
-
-<div class=trend_table>
-	<table>
-		<tr>
-
-			<th>Trend</th>
-
-			<th>Coordinate</th>
-
-		</tr>
-	</table>
-</div>
-
 <div class=login>
+
 	<a href="login.html">Login Here</a>
 
+
+
 <footer>
+
 	<p>
+
 		<text>
+
 		Created by Mason Seaman and Daniel Morgenthal
+
 		</text>
+		
+
 	</p>
+
 	<p>
+
 		<input type="image" src="https://g.twimg.com/about/feature-corporate/image/twitterbird_RGB.png" width="30">
+
 	</p>
+
 </footer>
+	
+</html>
