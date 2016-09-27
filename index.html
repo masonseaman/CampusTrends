@@ -89,6 +89,7 @@
 
 	<script>
 		"use strict";
+		header('Access-Control-Allow-Origin: *');
 		document.getElementById('search').addEventListener("click", getTweets);
 		
 		function getTweets()
