@@ -151,7 +151,7 @@
         }
         
          $('#show').click(function(){
-            todosRef.orderByValue().limitToFirst(3).once("value", function(snapshot){
+            todosRef.orderByValue().limitToLast(3).once("value", function(snapshot){
                 snapshot.forEach(function(data){
                     $("#recent").append("<p>" + data.val().text + "</p>");
                     console.log("The word is " + data.val().text);
