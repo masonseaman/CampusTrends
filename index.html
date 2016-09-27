@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
+
 <head>
 
 	<link rel="stylesheet" type="text/css" href="Main.css">
@@ -17,96 +16,183 @@
 	<div id="creator2" data-creator2="Daniel Morgenthal"></div>
 	
 </head> 	
+<body>
+	<div>
 
-<div>
+		<p>
 
-	<p>
+			<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
 
-		<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
+			<h1>CampusTrends</h1>
 
-		<h1>CampusTrends</h1>
+				<p>
 
-			<p>
+					<text>
 
-				<text>
+						CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
 
-					CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
+					</text>
 
-				</text>
-
-			</p>
-
-	</p>
-
-</div>
+				</p>
+        
+		</p>
+    
+	</div>
 
 
 
-<div class=search>
+	<div class=search>
 
-	<p> <input size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
+		<p> <input id="searchText" size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
 
-	<p><button>Search</button></p>
-	<p><button id="show">Show Trends</button></p>
-</div>
+		<p><button id="search">Search</button></p>
+		<p><button id="show">Show Trends</button></p>
+	</div>
 
+    <!--
+	<table id="myTable">
+		<tr>
+			<th>
+				Trend
+			</th>
+			<th>
+				Coordinates
+			<th>
+		</tr>
+	</table>
+    -->
+    
+    <p id = "recent">
+        Recent Searches:
+    </p>
+    
+    <div id= "todoItems">
+        <p id = "recent">
+    
+        </p>
+    </div>
+
+	<div class=login>
+
+		<a href="login.html">Login Here</a>
 	
-
-
-
-<table id="myTable">
-	<tr>
-		<th>
-			Trend
-		</th>
-		<th>
-			Coordinates
-		<th>
-	</tr>
-</table>
-
-<script>
-	"use strict";
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
-	var trends = [
-
-				{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
-			];
-
-			
-
-	document.getElementById('show').addEventListener("click", myFunction);
-
-
-
-	function myFunction()
-
-	{
-
-		for(var trend of trends)
-
+	<!--
+		"use strict";
+		
+		var trends = [
+					{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
+				];
+				
+		document.getElementById('show').addEventListener("click", myFunction);
+		function myFunction()
 		{
-			$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
+			for(var trend of trends)
+			{
+				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
+			}
 		}
+	-->
+        
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+	<script>
+		"use strict";
+        
+          var config = {
+            apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+            authDomain: "campus-trends.firebaseapp.com",
+            databaseURL: "https://campus-trends.firebaseio.com",
+            storageBucket: "campus-trends.appspot.com",
+            messagingSenderId: "425903145524"
+        };
+  
+        firebase.initializeApp(config);
 
-	}
+        var todosRef = firebase.database().ref('todos');
+        
+        todosRef.on('child_added', function(data){
+            createItem(data.val().text, data.key);    
+        });
+        todosRef.on('child_changed', function(data){
+            $('div[data-index="' + data.key + '"] input').val(data.val().text);
+        });
+        todosRef.on('child_removed', function(data){
+            $('div[data-index="' + data.key + '"]').remove();
+        });
+        
+        $('#search').click(function()
+        {
+            todosRef.push({ 'text': $('#searchText').val()});
+        });
+        
+  
+        function createItem(value, key)
+        {
+            $('#todoItems').append(
+                '<div class="todoItem" data-index="' + key+ '"><input type="text" onchange="itemChanged(this)" value="'
+                + value + '"><button onclick="deleteItem(this.parentElement)">&#x2716;</button></div>'
+            );
+        }
+        
+        function deleteItem(inputDiv)
+        {
+            todosRef.child(inputDiv.dataset.index).remove();
+        }
 
-</script>
+        function itemChanged(inputElem)
+        {
+            var index = inputElem.parentElement.dataset.index;
+            todosRef.child(inputElem.parentElement.dataset.index).set({ 'text': inputElem.value });
+        }
+        
+         $('#show').click(function(){
+            todosRef.orderByValue().limitToLast(3).once("value", function(snapshot){
+                snapshot.forEach(function(data){
+                    $("#recent").append("<p>" + data.val().text + "</p>");
+                    console.log("The word is " + data.val().text);
+                });
+            });
+        });
+        
+    </script>
+        
+        <!--
 
-<div class=login>
+        API call to Twitter. Doesn't seem to work client side.
+        
+		document.getElementById('search').addEventListener("click", getTweets);
+            
+		function getTweets()
+		{
+            var text = document.getElementById('searchText').value;
+			var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23"
+			//var apiUrl = "https://twitter.com/search?q=%23"
+			+ text
+			+ "&geocode=38.8301811,-077.307379,1mi"; 
+			
+			$.ajax({
+				url: apiUrl,
+				type: 'jsonp',
+				headers: 'Access-Control-Allow-Origin: *',
+				success: function(countTweets){
+					for (item in data['results']){
+						$('#search').append('<li> ' + data['results'][item]['text'] + '</li>');
+					}
+					
+				}
+			});
+		}
+        
+        -->
+		
 
-	<a href="login.html">Login Here</a>
 
-
-
+</body>
 <footer>
 
 	<p>
