@@ -34,9 +34,9 @@
 					</text>
 
 				</p>
-
+        
 		</p>
-
+    
 	</div>
 
 
@@ -49,6 +49,7 @@
 		<p><button id="show">Show Trends</button></p>
 	</div>
 
+    <!--
 	<table id="myTable">
 		<tr>
 			<th>
@@ -59,6 +60,17 @@
 			<th>
 		</tr>
 	</table>
+    -->
+    
+    <p id = "recent">
+        Recent Searches:
+    </p>
+    
+    <div id= "todoItems">
+        <p id = "recent">
+    
+        </p>
+    </div>
 
 	<div class=login>
 
@@ -66,7 +78,7 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
-	<script>
+	<!--
 		"use strict";
 		
 		var trends = [
@@ -85,15 +97,79 @@
 				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
 			}
 		}
-	</script>
-
+	-->
+        
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 	<script>
 		"use strict";
+        
+          var config = {
+            apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+            authDomain: "campus-trends.firebaseapp.com",
+            databaseURL: "https://campus-trends.firebaseio.com",
+            storageBucket: "campus-trends.appspot.com",
+            messagingSenderId: "425903145524"
+        };
+  
+        firebase.initializeApp(config);
+
+        var todosRef = firebase.database().ref('todos');
+        
+        todosRef.on('child_added', function(data){
+            createItem(data.val().text, data.key);    
+        });
+        todosRef.on('child_changed', function(data){
+            $('div[data-index="' + data.key + '"] input').val(data.val().text);
+        });
+        todosRef.on('child_removed', function(data){
+            $('div[data-index="' + data.key + '"]').remove();
+        });
+        
+        $('#search').click(function()
+        {
+            todosRef.push({ 'text': $('#searchText').val()});
+        });
+        
+  
+        function createItem(value, key)
+        {
+            $('#todoItems').append(
+                '<div class="todoItem" data-index="' + key+ '"><input type="text" onchange="itemChanged(this)" value="'
+                + value + '"><button onclick="deleteItem(this.parentElement)">&#x2716;</button></div>'
+            );
+        }
+        
+        function deleteItem(inputDiv)
+        {
+            todosRef.child(inputDiv.dataset.index).remove();
+        }
+
+        function itemChanged(inputElem)
+        {
+            var index = inputElem.parentElement.dataset.index;
+            todosRef.child(inputElem.parentElement.dataset.index).set({ 'text': inputElem.value });
+        }
+        
+         $('#show').click(function(){
+            todosRef.orderByValue().limitToFirst(3).once("value", function(snapshot){
+                snapshot.forEach(function(data){
+                    $("#recent").append("<p>" + data.val().text + "</p>");
+                    console.log("The word is " + data.val().text);
+                });
+            });
+        });
+        
+    </script>
+        
+        <!--
+
+        API call to Twitter. Doesn't seem to work client side.
+        
 		document.getElementById('search').addEventListener("click", getTweets);
-		
+            
 		function getTweets()
 		{
-			var text = document.getElementById('searchText').value;
+            var text = document.getElementById('searchText').value;
 			var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23"
 			//var apiUrl = "https://twitter.com/search?q=%23"
 			+ text
@@ -111,8 +187,9 @@
 				}
 			});
 		}
+        
+        -->
 		
-	</script>
 
 
 </body>
