@@ -102,7 +102,7 @@
 			$.ajax({
 				url: apiUrl,
 				type: 'jsonp',
-				headers: "Access-Control-Allow-Origin: *",
+				headers: 'Access-Control-Allow-Origin: *',
 				success: function(countTweets){
 					for (item in data['results']){
 						$('#search').append('<li> ' + data['results'][item]['text'] + '</li>');
