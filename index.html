@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
+
 <head>
 
 	<link rel="stylesheet" type="text/css" href="Main.css">
@@ -17,96 +16,105 @@
 	<div id="creator2" data-creator2="Daniel Morgenthal"></div>
 	
 </head> 	
+<body>
+	<div>
 
-<div>
+		<p>
 
-	<p>
+			<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
 
-		<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
+			<h1>CampusTrends</h1>
 
-		<h1>CampusTrends</h1>
+				<p>
 
-			<p>
+					<text>
 
-				<text>
+						CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
 
-					CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
+					</text>
 
-				</text>
+				</p>
 
-			</p>
+		</p>
 
-	</p>
-
-</div>
+	</div>
 
 
 
-<div class=search>
+	<div class=search>
 
-	<p> <input size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
+		<p> <input id="searchText" size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
 
-	<p><button>Search</button></p>
-	<p><button id="show">Show Trends</button></p>
-</div>
+		<p><button id="search">Search</button></p>
+		<p><button id="show">Show Trends</button></p>
+	</div>
 
+	<table id="myTable">
+		<tr>
+			<th>
+				Trend
+			</th>
+			<th>
+				Coordinates
+			<th>
+		</tr>
+	</table>
+
+	<div class=login>
+
+		<a href="login.html">Login Here</a>
 	
-
-
-
-<table id="myTable">
-	<tr>
-		<th>
-			Trend
-		</th>
-		<th>
-			Coordinates
-		<th>
-	</tr>
-</table>
-
-<script>
-	"use strict";
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	
-	var trends = [
-
-				{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
-
-				{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
-			];
-
-			
-
-	document.getElementById('show').addEventListener("click", myFunction);
-
-
-
-	function myFunction()
-
-	{
-
-		for(var trend of trends)
-
+	<script>
+		"use strict";
+		
+		var trends = [
+					{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
+					{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
+				];
+				
+		document.getElementById('show').addEventListener("click", myFunction);
+		function myFunction()
 		{
-			$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
+			for(var trend of trends)
+			{
+				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
+			}
 		}
+	</script>
 
-	}
+	<script>
+		"use strict";
+		document.getElementById('search').addEventListener("click", getTweets);
+		
+		function getTweets()
+		{
+			var text = document.getElementById('searchText').value;
+			//var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23"
+			var apiUrl = "https://twitter.com/search?q=%23"
+			+ text
+			+ "&geocode=38.8301811,-077.307379,1mi"; 
+			
+			$.ajax({
+				url: apiUrl,
+				type: 'jsonp',
+				success: function(countTweets){
+					for (item in data['results']){
+						$('#search').append('<li> ' + data['results'][item]['text'] + '</li>');
+					}
+					
+				}
+			});
+		}
+		
+	</script>
 
-</script>
 
-<div class=login>
-
-	<a href="login.html">Login Here</a>
-
-
-
+</body>
 <footer>
 
 	<p>
