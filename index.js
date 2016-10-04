@@ -7,4 +7,4 @@ var HelloMessage = React.createClass({
    }
 });
 
-ReactDOM.render(<HelloMessage name="Mason" />,document.getElementById(''))
+ReactDOM.render(<HelloMessage name="Mason" />,document.getElementById('test'));

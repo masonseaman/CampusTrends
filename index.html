@@ -3,26 +3,17 @@
 <html xmlns="http://www.w3.org/1999/html">
 
 <head>
-
-	<script	src=“https://cdnjs.com/libraries/babel-core/ 5.8.34">	</script>
-	<script src="/react.js"></script>
-	<script src="/react-dom.js"></script>
-	<script type="text/babel" src = "index.js"></script>
-
 	<link rel="stylesheet" type="text/css" href="Main.css">
-
-	
-
 	<meta charset="utf-8">
-
 	<title>CampusTrends</title>
-
 	<div id="creator1" data-creator1="Mason Seaman"></div>
 	<div id="creator2" data-creator2="Daniel Morgenthal"></div>
-	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
 </head>
 <body>
-	<div id="test"></div>
+
 	<div>
 
 		<p>
@@ -40,16 +31,16 @@
 					</text>
 
 				</p>
-        
+
 		</p>
-    
+
 	</div>
 
 
 
-	<div class=search>
+ <div class=search>
 
-		<p> <input id="searchText" size="35" type="search" placeholder="Enter keyword to search campus trends"> </p>
+		<p> <input id="searchText" size="75%" type="search" placeholder="Enter keyword to search campus trends"> </p>
 
 		<p><button id="search">Search</button></p>
 		<p><button id="show">Show Trends</button></p>
@@ -101,15 +92,17 @@
 		{
 			for(var trend of trends)
 			{
-				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>');
-			}
-		}
+				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>'    		}
 	-->
-        
+
+    <div id="app"> </div>
+    <div id="trends"></div>
+    <div id="list"></div>
+
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
-	<script>
+    <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
+	<script type="text/babel">
 		"use strict";
-        
           var config = {
             apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
             authDomain: "campus-trends.firebaseapp.com",
@@ -120,51 +113,126 @@
   
         firebase.initializeApp(config);
 
-        var todosRef = firebase.database().ref('todos');
-        
-        todosRef.on('child_added', function(data){
-            createItem(data.val().text, data.key);    
+        var TodoList = React.createClass({
+            render: function() {
+                var _this = this;
+                var createItem = function (item, key) {
+                    return (
+                            <div key={key}><input type="text" onChange={_this.props.onChange.bind(null, item['.key'])}
+                                                  value={item.text}/>
+                                <button onClick={_this.props.removeItem.bind(null, item['.key'])}>Remove</button>
+                            </div>
+                    );
+                }
+                return <ul>{this.props.items.map(createItem)}</ul>;
+            }
         });
-        todosRef.on('child_changed', function(data){
-            $('div[data-index="' + data.key + '"] input').val(data.val().text);
-        });
-        todosRef.on('child_removed', function(data){
-            $('div[data-index="' + data.key + '"]').remove();
-        });
-        
-        $('#search').click(function()
-        {
-            todosRef.push({ 'text': $('#searchText').val()});
-        });
-        
-  
-        function createItem(value, key)
-        {
-            $('#todoItems').append(
-                '<div class="todoItem" data-index="' + key+ '"><input type="text" onchange="itemChanged(this)" value="'
-                + value + '"><button onclick="deleteItem(this.parentElement)">&#x2716;</button></div>'
-            );
-        }
-        
-        function deleteItem(inputDiv)
-        {
-            todosRef.child(inputDiv.dataset.index).remove();
-        }
 
-        function itemChanged(inputElem)
-        {
-            var index = inputElem.parentElement.dataset.index;
-            todosRef.child(inputElem.parentElement.dataset.index).set({ 'text': inputElem.value });
-        }
-        
-         $('#show').click(function(){
-            todosRef.orderByValue().limitToLast(3).once("value", function(snapshot){
-                snapshot.forEach(function(data){
-                    $("#recent").append("<p>" + data.val().text + "</p>");
-                    console.log("The word is " + data.val().text);
-                });
-            });
+        var TodoApp = React.createClass({
+            mixins: [ReactFireMixin],
+            getInitialState: function () {
+                return {items: []};
+            },
+            componentWillMount: function () {
+                this.fireRef = firebase.database().ref('todos');
+
+                this.bindAsArray(this.fireRef, "items");
+            },
+            onChange: function (fireKey, event) {
+                this.fireRef.child(fireKey).set({"text": event.target.value});
+            },
+            removeItem: function (key) {
+                this.fireRef.child(key).remove();
+            },
+
+            handleAdd: function (event) {
+                event.preventDefault();
+                this.fireRef.push({"text": this.refs.searchTerm.value});
+            },
+            render: function () {
+                return (
+                        <div>
+                            <h3>Recent Searches</h3>
+                            <TodoList items={this.state.items} removeItem={this.removeItem} onChange={this.onChange}/>
+                            <form onSubmit={this.handleAdd}>
+                                <input id="searchText" type="text" placeholder="Enter keyword" ref='searchTerm'></input>
+                                <input type="submit" value="Submit"></input>
+                            </form>
+                        </div>
+                );
+            }
         });
+
+        var ShowTrends = React.createClass(
+                {
+                    mixins: [ReactFireMixin],
+                    showTrends: function(){
+                        return{
+                            items: []
+                        }
+                    },
+                    render: function(){
+                        return(
+                                <div id="trends">
+                                    <h3>Past Trends</h3>
+                                    <button onClick={this.showTrends}>Show Trends</button>
+                                </div>
+                        )
+                    }
+
+                }
+        );
+        ReactDOM.render(<TodoApp />, document.getElementById('app'));
+        ReactDOM.render(<ShowTrends />, document.getElementById('trends'));
+        ReactDOM.render(<TodoList />, document.getElementById('list'));
+
+
+
+        //        var todosRef = firebase.database().ref('todos');
+//
+//        todosRef.on('child_added', function(data){
+//            createItem(data.val().text, data.key);
+//        });
+//        todosRef.on('child_changed', function(data){
+//            $('div[data-index="' + data.key + '"] input').val(data.val().text);
+//        });
+//        todosRef.on('child_removed', function(data){
+//            $('div[data-index="' + data.key + '"]').remove();
+//        });
+//
+//        $('#search').click(function()
+//        {
+//            todosRef.push({ 'text': $('#searchText').val()});
+//        });
+//
+//
+//        function createItem(value, key)
+//        {
+//            $('#todoItems').append(
+//                '<div class="todoItem" data-index="' + key+ '"><input type="text" onchange="itemChanged(this)" value="'
+//                + value + '"><button onclick="deleteItem(this.parentElement)">&#x2716;</button></div>'
+//            );
+//        }
+//
+//        function deleteItem(inputDiv)
+//        {
+//            todosRef.child(inputDiv.dataset.index).remove();
+//        }
+//
+//        function itemChanged(inputElem)
+//        {
+//            var index = inputElem.parentElement.dataset.index;
+//            todosRef.child(inputElem.parentElement.dataset.index).set({ 'text': inputElem.value });
+//        }
+//
+//         $('#show').click(function(){
+//            todosRef.orderByValue().limitToLast(3).once("value", function(snapshot){
+//                snapshot.forEach(function(data){
+//                    $("#recent").append("<p>" + data.val().text + "</p>");
+//                    console.log("The word is " + data.val().text);
+//                });
+//            });
+//        });
         
     </script>
         
@@ -196,8 +264,8 @@
 		}
         
         -->
-		
 
+    <div id="test"></div>
 
 </body>
 <footer>
