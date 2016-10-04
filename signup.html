@@ -10,14 +10,14 @@
 	<h1> Sign up for an account here! </h1>
 	
     <div>
- 		First name:
+ 		<!--First name:
  		<input id ="first" type="text" name="firstname"><br>
  		Last name:
- 		<input id = "last" type="text" name="lastname"><br>
+ 		<input id = "last" type="text" name="lastname"><br>-->
  		Email:
  		<input id = "email" type="email" name="emailaddress"><br>
- 		Birthdate:
- 		<input type="date" name="birthdate">
+ 		Password:
+ 		<input type="password" name="password" id ='password' placeholder = "Input your Password" pattern ="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br>
  		<p><button id = "submit">Submit</button></p>
  	</div>
  	
@@ -44,16 +44,45 @@
 	<br><a href="index.html">Home</a><br>
 	<a href="login.html">Sign in now!</a>
 
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+	<script>
+		"use strict";
+        
+          var config = {
+            apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+            authDomain: "campus-trends.firebaseapp.com",
+            databaseURL: "https://campus-trends.firebaseio.com",
+            storageBucket: "campus-trends.appspot.com",
+            messagingSenderId: "425903145524"
+        };
+  
+        firebase.initializeApp(config);
+    </script>
+    
+    <script>
      "use strict";
          
      document.getElementById('submit').addEventListener("click", write);
      function write()
      {
-         var first = document.getElementById('first').value;
-         var last = document.getElementById('last').value;
+         //var first = document.getElementById('first').value;
+         //var last = document.getElementById('last').value;
          var email = document.getElementById('email').value;
+         var password = document.getElementById('password').value;
          var name = document.getElementById('name');
-         name.innerHTML = "Your name is: " + first + " " + last + ". " + "Your Email is: " + email + ".";
+         name.innerHTML = "";
+         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+             // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            name.innerHTML = "Error: " + errorCode + " " +  errorMessage;
+            // ...
+         });
+         if(name.innerHTML == "")
+         {
+                name.innerHTML = "Success! Your email and password have been saved.";
+         }
+         //name.innerHTML = "Error: " errorCode + " " +  errorMessage;
      }
      </script>
 </body>
