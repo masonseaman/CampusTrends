@@ -316,9 +316,9 @@
         ReactDOM.render(<TodoList />, document.getElementById('list'));     
 		
 		
-		describe('TodoApp', function () {
-        var TestUtils = React.addons.TestUtils;
-        var todoAppComponent, element, renderedDOM;
+		describe('TodoApp', function (){
+            var TestUtils = React.addons.TestUtils;
+            var todoAppComponent, element, renderedDOM;
         beforeEach(function (done) {
             element = React.createElement(TodoApp);
             todoAppComponent = TestUtils.renderIntoDocument(element);
