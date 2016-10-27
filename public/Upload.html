@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ReactFire Demo</title>
+    <!-- From Lecture 15 Demo -->
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
@@ -12,7 +12,14 @@
 <div id ="todoItems">
 
 </div>
+
 <form id="newItemForm" action="/todo" method="post" enctype="multipart/form-data"><input type="text" id="newTodo" name="todoText" /><input type="file" id="newFile" name="img" /><input type="submit" value="New" /></form>
+    
+<div id = "link">
+    
+    <a href="login.html">Return to Login</a>
+    
+</div>
 
 <script type="text/babel">
     "use strict";
@@ -52,7 +59,6 @@
             url: "/todo",
             data: formData,processData: false,
             contentType: false
-
         });
     });
 </script>
