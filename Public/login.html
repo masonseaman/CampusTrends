@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="login.css">
+  <title>CampusTrends: Login Page</title>
+</head>
+<body>
+  
+  <form>
+    <label for="username">Email:</label><br>
+    <input type="text" id ="username" required name="username" placeholder="Input your Email"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" name="password" id ='password' placeholder = "Input your Password"> <br>
+      <!--
+      <details>
+         <summary>
+          Password Requirements
+         </summary>
+         Password must contain one number, one uppercase and lowercase character, and at least eight characters total.
+      </details>
+      -->
+    <input type="button" id = "login" value="Login" class="submit"> <br>
+    <input type="checkbox" checked = "checked" id = "checkbox"> 
+    <label for="checkbox">Remember Me?</label>
+    <a href="signup.html">Need to sign up?</a>
+  </form>
+  
+  <div class=home>
+	  <a href="index.html" class="link">Return to Homepage</a>
+  </div>
+    
+    <div>
+         <p id="name">
+         </p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+        "use strict";
+        
+        var config = {
+            apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+            authDomain: "campus-trends.firebaseapp.com",
+            databaseURL: "https://campus-trends.firebaseio.com",
+            storageBucket: "campus-trends.appspot.com",
+            messagingSenderId: "425903145524"
+        };
+  
+        firebase.initializeApp(config);
+        
+        //var email = document.getElementById('username').value;
+        //var password = document.getElementById('password').value;
+        
+        document.getElementById('login').addEventListener("click", write);
+        function write(){
+            var email = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var name = document.getElementById('name');
+            name.innerHTML = "";
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                name.innerHTML = "Error: " + errorCode + " " +  errorMessage;
+                //console.log("Error: " + errorCode + " " +  errorMessage);
+                //console.log("" + email + "" + password);
+                // ...
+            });
+            if(name.innerHTML == "")
+            {
+                name.innerHTML = "Success! You have been signed-in.";
+            }
+        }
+     </script>
+     
+    <!--
+     <div>
+         <p>
+             Refresh or submit to Return Home. 
+         </p>
+     </div>
+    -->
+  
+</body>
+</html>
