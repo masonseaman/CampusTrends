@@ -6,7 +6,7 @@
 		"node": "6.9.1"
 	},
 	"scripts":{
-		"test": "echo \"error: no test specified\" && exit 1"
+		"test": "echo \"error: no test specified\" && exit 1",
 		"start": "node app.js"
 	},
 	"author": "",
