@@ -8,8 +8,11 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 firebase.initializeApp({
-    serviceAccount: "privkey.json",
-    databaseURL: "https://swe432lecture12.firebaseio.com"
+		apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+		authDomain: "campus-trends.firebaseapp.com",
+		databaseURL: "https://campus-trends.firebaseio.com",
+		storageBucket: "campus-trends.appspot.com",
+		messagingSenderId: "425903145524"
 });
 var fireRef = firebase.database().ref('todos');
 var port = process.env.PORT || 3000;
