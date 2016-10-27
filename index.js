@@ -1,6 +1,7 @@
 var port = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
+var firebase = require("firebase");
 
 firebase.initializeApp({
 	serviceAccount: "privkey.json",
