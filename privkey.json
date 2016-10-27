@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "campus-trends",
+  "private_key_id": "d6a92d171211a12ac5c0102e5530caaba82d2abc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5KwqHxc01fa64\n1FD5T6GmZ/4qiZX/lvgU4ZCPfkHJcPWQh/D8l1kK25+FGmbfu6KF7CfYy00+hXXi\n61xtsuouAkYdP3AkhACvCs1hzcuw6upHABOr3m66evGhmd7kyyCKLtx+ROg52ONu\nEjKMgNnbWacQ7VtAlUMMp9QhvadHr0wM+DmzGiURYniTeoDGLYaIKIBMRKIvBy2v\ngRQt0HHBka4d9aADrN0DF2N15Yd2T7+dPItbW1Ob6BT8a8s5KqaVqxCUUzj4nT8K\neSKqMFBPUf1yp9v9VJKOegC604XSO5CaWPtoNWROuoaE4eLbGtniKGe9A+RYlB/x\nSMEecDbRAgMBAAECggEAQAd4HrbxXNvW/Sa90VgN58LyCreE3NrRcjcFi/j2ureK\n0q2PUWjsa2rCYH5esGLrsi+VH8w9K69uskb8sRo7DCnRIO/80UOsENtFZdqJ4uV4\nmZCXPMkvtOAqidzxTGBJIj9OE4O0Ybxz+G3meNtdehIoSRwqf8ydYNTv77LrE0gd\nvQcL34N/O4ujdO9p4TNR6qHA/+f3dnEduTruN/9zb/A+uhZP89WtVhz3PWgpJ8qQ\nb8qplQJZE1+9XUSINM2rPp+j5AxO5UxV6g+dFr4fSeTlVJKuX2Rx53U6qyYWeJ4E\nkz0lay2s1JCPLBbdHp5WP8OtzPWdIrbA3R7CpPXiWQKBgQDoBo0Cc2O+GDeEUIQU\nODxXj0n38Qlo9NmvUDefjkLHFqtCs2IstnilznrCLBjZNkVlEo1FIkj9UScsI6Ij\nG12vYA6Ikt/J6OzprOhlc7R7qw5q9plFDCgfsXxI5HcfffPfPYb9iB0bZ0nNmsP4\n9AsbvIqffs3t8gl3GqcPb3IhFwKBgQDMTQkKH+LhE3qJnd3VckCVuaKwMQRUeDvc\nYJcF7iKa+PCC12TomijWk/7fB8o2MS1wF2F4svvPnnNz6tFpeU2hsSl1u0Zw0/Y+\np7h3jhAKJDSUTEulwx6+JNLbpI7DeMMU6kzSYWGwYHRobmuemzkrFrSyQL9wa8jR\nPGTr/7vIVwKBgQCWAI4vFGxaXAugNfF9pPGV5eP7MFBWE12cUm7zbyRK06P6pkAF\nCh6rivagC6Qw4T4x3rGIDWdEpa9+gLb0nV+O3rnmn5WgUj6/v3IrDIeVH/xdOHnU\nQsy52KOx+EnvCR2dqIhZ5iJzMe5rxu+FRjjcQKMaA/+cIkruPkPc3b7aFwKBgA1+\ntS8nBgyKBdkbRXD4+A0r0vRCeJ+/xWx8MN2iakTEVta9tZuruzDZW8eNsyy7ON4j\nnTukzv9a3xN0GlsWOSuKEUwGj9OaHLTszUGQb7zLwXFeTMzpQ5mZwxfhGdENpA04\noNRwvEwzQt03FgLHDBKtkEgKANtDM2Om0p/IJ7ZHAoGAIc93Y/4HF9bUuJOL7zP3\n5lGwRruTbryGJF6fdmLlJv7pvNiFX7aDvOt5S697QHc7ZDH577fVbGgDj8Lel+Y5\nuEXYlLX1r2zIxYy4paTzHLnuQof6VYvIuV/PZpVMV/DmFWg1HZAe11dUD++r5vLZ\nUJL5la1J/LsuTw1I7iazcxY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "campus-trends@appspot.gserviceaccount.com",
+  "client_id": "115576489203082757685",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/campus-trends%40appspot.gserviceaccount.com"
+}

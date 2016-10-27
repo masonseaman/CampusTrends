@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- From Lecture 15 Demo -->
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+</head>
+<body>
+
+<div id ="todoItems">
+
+</div>
+
+<form id="newItemForm" action="/todo" method="post" enctype="multipart/form-data"><input type="text" id="newTodo" name="todoText" /><input type="file" id="newFile" name="img" /><input type="submit" value="New" /></form>
+    
+<div id = "link">
+    
+    <a href="login.html">Return to Login</a>
+    
+</div>
+
+<script type="text/babel">
+    "use strict";
+    var config = {
+           apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
+           authDomain: "campus-trends.firebaseapp.com",
+           databaseURL: "https://campus-trends.firebaseio.com",
+           storageBucket: "campus-trends.appspot.com",
+           messagingSenderId: "425903145524"
+    };
+    firebase.initializeApp(config);
+
+    var fireRef = firebase.database().ref('image');
+    fireRef.on("child_added",function(v){
+        createTodo(v.val().text,v.val().img);
+    });
+    function createTodo(text, img)
+    {
+        if(img)
+        {
+            $('#todoItems').append(
+                    '<div class="todoItem"><img src="'+img+'" /><br/>'+text+'</div>'
+            );
+        }
+        else
+            $('#todoItems').append(
+                '<div class="todoItem">'+text+'</div>'
+            );
+    }
+    $('#newItemForm').submit(function(e)
+    {
+        e.preventDefault();
+        var formData = new FormData($("#newItemForm")[0]);
+        console.log(formData);
+        $.ajax({
+            type: "POST",
+            url: "/todo",
+            data: formData,processData: false,
+            contentType: false
+        });
+    });
+</script>
+
+</body>
+</html>
