@@ -349,13 +349,12 @@
 				expect(todoAppComponent.fireRef.push).toHaveBeenCalledWith({"text": ""});
             });
         });
-	</script>
+	
 
         
 
-        <!--
-        API call to Twitter. Doesn't seem to work client side.
-        document.getElementById('search').addEventListener("click", getTweets);
+      
+        document.getElementById('button').addEventListener("click", getTweets);
 		function getTweets()
 		{
             var text = document.getElementById('searchText').value;
@@ -374,7 +373,7 @@
 				}
 			});
 		}
-        -->
+		</script>
     <div id="test"></div>
 </body>
 <footer>
