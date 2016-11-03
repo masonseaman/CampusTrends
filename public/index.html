@@ -222,6 +222,11 @@
 			$.ajax({
 				url: url,
 				dataType: "jsonp",
+				success: function(countTweets){
+					for (item in data['results']){
+						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
+					}	
+				}
 			});
 		}
 		
