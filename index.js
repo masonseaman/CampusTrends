@@ -15,8 +15,8 @@ var config = {
 		access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 	},
 };
-var text = document.getElementById('searchText').value;
-var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23" + text + "&geocode=38.8301811,-077.307379,1mi"; 
+//var text = document.getElementById('searchText').value;
+//var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23" + text + "&geocode=38.8301811,-077.307379,1mi"; 
 
 
 
