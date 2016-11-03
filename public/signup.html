@@ -59,10 +59,11 @@
 						</div>
 					);
 				},
-				handleSignup: function()
+				handleSignup: function(e)
 				{
+                    e.preventDefault();
 					var emailtext = this.refs.email.value;
-					var passwordtext = this.id.password.value;
+					var passwordtext = this.refs.password.value;
                     console.log(emailtext + " " + passwordtext);
 					firebase.auth().createUserWithEmailAndPassword(emailtext, passwordtext).catch(
 						function(error){
