@@ -231,10 +231,6 @@
 			$.ajax({
 				url: url,
 				dataType: "jsonp",
-				beforeSend:  function (xhr) { 
-						 xhr.setRequestHeader ("Authorization", "Bearer XXmyBearerCodeXX"); 
-						},
-				success: function(json){ alert(json); }
 			});
 		}
 		
