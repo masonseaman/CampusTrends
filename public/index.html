@@ -349,6 +349,31 @@
 				expect(todoAppComponent.fireRef.push).toHaveBeenCalledWith({"text": ""});
             });
         });
+	
+
+        
+
+      <!--
+        document.getElementById('button').addEventListener("click", getTweets);
+		function getTweets()
+		{
+            var text = document.getElementById('searchText').value;
+			var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23"
+			//var apiUrl = "https://twitter.com/search?q=%23"
+			+ text
+			+ "&geocode=38.8301811,-077.307379,1mi"; 	
+			$.ajax({
+				url: apiUrl,
+				type: 'jsonp',
+				headers: 'Access-Control-Allow-Origin: *',
+				success: function(countTweets){
+					for (item in data['results']){
+						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
+					}	
+				}
+			});
+		}
+		-->
 		</script>
     <div id="test"></div>
 </body>
