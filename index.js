@@ -6,23 +6,6 @@ var uploader = multer({ storage: multer.memoryStorage({}) });
 var app = express();
 var port = process.env.PORT || 3000;
 
-/*
-var config = {		
-	keys: {
-		consumer_key: process.env.TWITTER_CONSUMER_KEY,
-		consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-		access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-		access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-	},
-};
-var text = document.getElementById('searchText').value;
-var apiUrl = "https://api.twitter.com/1.1/search/tweets.jsonp?q=%23" + text + "&geocode=38.8301811,-077.307379,1mi"; 
-*/
-
-
-
-
-
 // app.use(uploader.single("img"));
 firebase.initializeApp({
     serviceAccount: "privkey.json",
