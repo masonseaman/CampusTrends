@@ -224,14 +224,19 @@
 		var test = document.getElementById('searchText').value;
 		var url = "https://api.twitter.com/1.1/search/tweets.json?q=%23" + test + "&src=typd";
 		
-		$.ajax({
-			url: url,
-			dataType: "jsonp",
-			beforeSend:  function (xhr) { 
-					 xhr.setRequestHeader ("Authorization", "Bearer XXmyBearerCodeXX"); 
-					},
-			success: function(json){ alert(json); }
-		});
+		document.getElementById('search').addEventListener("click" getTweets);
+		
+		function getTweets()
+		{
+			$.ajax({
+				url: url,
+				dataType: "jsonp",
+				beforeSend:  function (xhr) { 
+						 xhr.setRequestHeader ("Authorization", "Bearer XXmyBearerCodeXX"); 
+						},
+				success: function(json){ alert(json); }
+			});
+		}
 		
 	</script>
 	
