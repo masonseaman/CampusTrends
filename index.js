@@ -24,10 +24,10 @@ firebase.initializeApp({
 				access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 			},
 		};
-		var test = document.getElementById('searchText').value;
+		var test = window.parent.mainPageMethod(document.getElementById('searchText').value);
 		var url = "https://api.twitter.com/1.1/search/tweets.json?q=%23" + test + "&src=typd";
 		
-		document.getElementById('search').addEventListener("click", getTweets);
+		window.parent.mainPageMethod(document.getElementById('search').addEventListener("click", getTweets));
 		
 		function getTweets()
 		{
