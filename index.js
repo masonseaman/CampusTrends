@@ -7,11 +7,26 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 // app.use(uploader.single("img"));
-
 firebase.initializeApp({
     serviceAccount: "privkey.json",
     databaseURL: "https://campus-trends.firebaseio.com"
 });
+
+//twitter
+
+"use strict"
+		
+		var config = {		
+			keys: {
+				consumer_key: process.env.TWITTER_CONSUMER_KEY,
+				consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+				access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+				access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+			},
+		};
+		
+//end twitter
+
 
 /**
  * Google cloud storage part

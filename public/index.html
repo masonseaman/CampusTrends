@@ -92,8 +92,8 @@
 
 
 
-     <p><button id="search"> <a href="chart.html">Search</a></button></p>
-
+     <p><button id="search"> <a href="chart.html">Chart</a></button></p>
+	<p> <button id="showtweets"> <a>Show Tweets</a></button></p>
 		<p><button id="show">Show Trends</button></p>
 
 	</div>
@@ -210,6 +210,28 @@
 
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
 
+	<script type="text/javascript" src=../index.js>
+		"use strict"
+		var test = document.getElementById('searchText').value;
+		var url = "https://api.twitter.com/1.1/search/tweets.json?q=%23" + test + "&src=typd";
+		
+		document.getElementById('showtweets').addEventListener("click", getTweets);
+		
+		function getTweets()
+		{
+			$.ajax({
+				url: url,
+				dataType: "jsonp",
+				success: function(countTweets){
+					for (item in data['results']){
+						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
+					}	
+				}
+			});
+		}
+		
+	</script>
+	
 	<script type="text/babel">
 
 		"use strict";
@@ -349,13 +371,12 @@
 				expect(todoAppComponent.fireRef.push).toHaveBeenCalledWith({"text": ""});
             });
         });
-	</script>
+	
 
         
 
-        <!--
-        API call to Twitter. Doesn't seem to work client side.
-        document.getElementById('search').addEventListener("click", getTweets);
+      <!--
+        document.getElementById('button').addEventListener("click", getTweets);
 		function getTweets()
 		{
             var text = document.getElementById('searchText').value;
@@ -369,12 +390,13 @@
 				headers: 'Access-Control-Allow-Origin: *',
 				success: function(countTweets){
 					for (item in data['results']){
-						$('#search').append('<li> ' + data['results'][item]['text'] + '</li>');
+						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
 					}	
 				}
 			});
 		}
-        -->
+		-->
+		</script>
     <div id="test"></div>
 </body>
 <footer>

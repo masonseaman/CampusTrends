@@ -12,3 +12,5 @@ Implemented Scenarios:
         Users can use the signup page to register using an email and password. Email is checked for uniqueness. After registration, users can login using this information.
 4.	View Trends:
     After a search, D3.js bar chart will appear to show the trend results over time.
+    
+Scenarios 1, 2, and 3 should be tested for homework 8.
