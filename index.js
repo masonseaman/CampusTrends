@@ -19,13 +19,16 @@ var T = new Twit({
 	access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
 	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });	
-var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
-var stream = T.stream('statuses/filter', {locations: GMU, q:'#test', count: 10})
 
-stream.on('tweet', function (tweet){
-	console.log(tweet)
-	}
-)
+function test(){
+	var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
+	var stream = T.stream('statuses/filter', {locations: GMU, q:'#test', count: 10})
+
+	stream.on('tweet', function (tweet){
+		console.log(tweet)
+		}
+	)
+}
 //end twitter
 
 
