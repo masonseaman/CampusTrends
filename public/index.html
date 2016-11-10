@@ -89,146 +89,70 @@
 
 
 		<p> <input id="searchText" size="75%" type="search" placeholder="Enter keyword to search campus trends"> </p>
-
-
-
-     <p><button id="search"> <a href="chart.html">Chart</a></button></p>
+     <div>Show the results for your search around the GMU Campus:</div>
 	<p> <button id="showtweets"> <a>Show Tweets</a></button></p>
+     <div> Show the top three most recent searches:</div>
 		<p><button id="show">Show Trends</button></p>
 
 	</div>
-
-
-
-    <!--
-
-	<table id="myTable">
-
-		<tr>
-
-			<th>
-
-				Trend
-
-			</th>
-
-			<th>
-
-				Coordinates
-
-			<th>
-
-		</tr>
-
-	</table>
-
-    -->
-
-    
-
     <p id = "recent">
-
         Recent Searches:
-
     </p>
-
-    
-
     <div id= "todoItems">
-
-        <p id = "recent">
-
-    
-
-        </p>
-
+        <p id = "recent"></p>
     </div>
-
-
-
 	<div class=login>
-
-
-
 		<a href="login.html">Login Here</a>
-
-
-
+	</div>
+    <div class=signup>
+		<a href="signup.html">Need to Sign up?</a>
+	</div>
+    <div class=chart>
+		<a href="chart.html">View Charts</a>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-	
-
-	<!--
-
-		"use strict";
-
-		
-
-		var trends = [
-
-					{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
-
-				];
-
-				
-
-		document.getElementById('show').addEventListener("click", myFunction);
-
-		function myFunction()
-
-		{
-
-			for(var trend of trends)
-
-			{
-
-				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>'    		}
-
-	-->
-
-
-
     <div id="app"> </div>
-
     <div id="trends"></div>
-
     <div id="list"></div>
-
-
 
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
-
+	
 	<script type="text/javascript" src=../index.js>
-		"use strict"
-		var test = document.getElementById('searchText').value;
-		var url = "https://api.twitter.com/1.1/search/tweets.json?q=%23" + test + "&src=typd";
-		
-		document.getElementById('showtweets').addEventListener("click", getTweets);
-		
-		function getTweets()
-		{
-			$.ajax({
-				url: url,
-				dataType: "jsonp",
-				success: function(countTweets){
-					for (item in data['results']){
-						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
-					}	
-				}
-			});
+		var express = require('express');
+        var gcloud = require('google-cloud');
+        var firebase = require('firebase');
+        var multer = require("multer");
+        var uploader = multer({ storage: multer.memoryStorage({}) });
+        var app = express();
+        var port = process.env.PORT || 3000;
+        var Twit = require('ntwitter');
+
+        var twit = new Twit({      
+            consumer_key: process.env.TWITTER_CONSUMER_KEY,
+            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+            access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+            access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+        }); 
+        function test(){
+    		twit.search('nodejs or #node', {}, function(err,data){
+                console.log(data);
+            });
+        }
+		function getTweets(){
+            var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
+            var text = document.getElementById('searchText').getText();
+            twit.stream('statuses/sample', {locations: gmu}, function(stream){
+                    stream.on('data', function (data){
+                        console.log(data)
+                    });
+                }
 		}
+
+        document.getElementById('showtweets').addEventListener("click", test);
 		
 	</script>
 	
@@ -236,8 +160,7 @@
 
 		"use strict";
 
-          var config = {
-
+          var config = 
             apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
 
             authDomain: "campus-trends.firebaseapp.com",
