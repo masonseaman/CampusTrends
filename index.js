@@ -5,7 +5,7 @@ var multer = require("multer");
 var uploader = multer({ storage: multer.memoryStorage({}) });
 var app = express();
 var port = process.env.PORT || 3000;
-
+var Twit = require('twit');
 // app.use(uploader.single("img"));
 firebase.initializeApp({
     serviceAccount: "privkey.json",
@@ -13,18 +13,19 @@ firebase.initializeApp({
 });
 
 //twitter
+var T = new Twit({		
+	consumer_key: process.env.TWITTER_CONSUMER_KEY,
+	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+	access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+});	
+var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
+var stream = T.stream('statuses/filter', {locations: GMU, q:'#test', count: 10})
 
-"use strict"
-		
-		var config = {		
-			keys: {
-				consumer_key: process.env.TWITTER_CONSUMER_KEY,
-				consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-				access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-				access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-			},
-		};
-		
+stream.on('tweet', function (tweet){
+	console.log(tweet)
+	}
+)
 //end twitter
 
 
