@@ -137,7 +137,7 @@
 		function getTweets(){
             var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
             var text = document.getElementById('searchText').getText();
-            twit.stream('statuses/sample', {'locations': GMU}, function(stream){
+            twit.stream('statuses/sample', {locations: gmu}, function(stream){
                     stream.on('data', function (data){
                         console.log(data)
                     });
