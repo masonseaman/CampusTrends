@@ -209,25 +209,19 @@
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
-
+	
 	<script type="text/javascript" src=../index.js>
-		"use strict"
-		var test = document.getElementById('searchText').value;
-		var url = "https://api.twitter.com/1.1/search/tweets.json?q=%23" + test + "&src=typd";
-		
+		var twit = new Twitter({
+			consumer_key: 'CONSUMER_KEY_HERE',
+			consumer_secret: 'CONSUMER_SECRET_HERE',
+			access_token_key: 'ACCESS_TOKEN_KEY_HERE',
+			access_token_secret: 'ACCESS_TOKEN_SECRET_HERE'		
+		});
 		document.getElementById('showtweets').addEventListener("click", getTweets);
-		
-		function getTweets()
-		{
-			$.ajax({
-				url: url,
-				dataType: "jsonp",
-				success: function(countTweets){
-					for (item in data['results']){
-						$('#recent').append('<li> ' + data['results'][item]['text'] + '</li>');
-					}	
-				}
-			});
+		function getTweets{
+			var text = document.getElementById('searchText').getText();
+			twit.get('search/tweets', {q:text}, function(error, tweets, response));
+			$('#list').append('tweets')
 		}
 		
 	</script>
@@ -236,8 +230,7 @@
 
 		"use strict";
 
-          var config = {
-
+          var config = 
             apiKey: "AIzaSyAWD7noPfQsrc0mjq9KJgGRvqJWWYXQ7TI",
 
             authDomain: "campus-trends.firebaseapp.com",
