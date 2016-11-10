@@ -211,17 +211,21 @@
     <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
 	
 	<script type="text/javascript" src=../index.js>
-		var twit = new Twitter({
-			consumer_key: 'CONSUMER_KEY_HERE',
-			consumer_secret: 'CONSUMER_SECRET_HERE',
-			access_token_key: 'ACCESS_TOKEN_KEY_HERE',
-			access_token_secret: 'ACCESS_TOKEN_SECRET_HERE'		
-		});
+		var T = new Twit({        
+        consumer_key: process.env.TWITTER_CONSUMER_KEY,
+        consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+        access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+        access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+       }); 
+    
 		document.getElementById('showtweets').addEventListener("click", getTweets);
 		function getTweets{
-			var text = document.getElementById('searchText').getText();
-			twit.get('search/tweets', {q:text}, function(error, tweets, response));
-			$('#list').append('tweets')
+            var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
+            var text = document.getElementById('searchText').getText();
+            var stream = T.stream('statuses/filter', {locations: GMU, q:text, count: 10});
+            stream.on('tweet', function (tweet){
+                console.log(tweet)
+                });
 		}
 		
 	</script>
