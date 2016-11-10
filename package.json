@@ -12,12 +12,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-        "body-parser": "^1.15.2",
-          "express": "^4.14.0",
-          "express-fileupload": "0.0.5",
-          "firebase": "^3.5.1",
-          "google-cloud": "^0.42.2",
-          "multer": "^1.2.0",
-          "nodemon": "^1.11.0"
+		"body-parser": "^1.15.2",
+		"express": "^4.14.0",
+		"express-fileupload": "0.0.5",
+		"firebase": "^3.5.1",
+		"google-cloud": "^0.42.2",
+		"multer": "^1.2.0",
+		"nodemon": "^1.11.0",
+		"ntwitter":"0.5.0"
 	}
 }
