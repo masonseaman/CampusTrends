@@ -97,114 +97,21 @@
 		<p><button id="show">Show Trends</button></p>
 
 	</div>
-
-
-
-    <!--
-
-	<table id="myTable">
-
-		<tr>
-
-			<th>
-
-				Trend
-
-			</th>
-
-			<th>
-
-				Coordinates
-
-			<th>
-
-		</tr>
-
-	</table>
-
-    -->
-
-    
-
     <p id = "recent">
-
         Recent Searches:
-
     </p>
-
-    
-
     <div id= "todoItems">
-
-        <p id = "recent">
-
-    
-
-        </p>
-
+        <p id = "recent"></p>
     </div>
-
-
-
 	<div class=login>
-
-
-
 		<a href="login.html">Login Here</a>
-
-
-
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-	
-
-	<!--
-
-		"use strict";
-
-		
-
-		var trends = [
-
-					{name: "trend1", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend2", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend3", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend4", coordinates: "40.7127837,-74.00594130000002"},
-
-					{name: "trend5", coordinates: "40.7127837,-74.00594130000002"}
-
-				];
-
-				
-
-		document.getElementById('show').addEventListener("click", myFunction);
-
-		function myFunction()
-
-		{
-
-			for(var trend of trends)
-
-			{
-
-				$('#myTable').append('<tr> <td> Trend: ' + trend.name + '</td> <td>Coordinates: ' + trend.coordinates + '</td> </tr>'    		}
-
-	-->
-
-
-
     <div id="app"> </div>
-
     <div id="trends"></div>
-
     <div id="list"></div>
-
-
 
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 
@@ -227,7 +134,7 @@
             access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
         }); 
 		document.getElementById('showtweets').addEventListener("click", getTweets);
-		function getTweets{
+		function getTweets(){
             var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
             var text = document.getElementById('searchText').getText();
             twit.stream('statuses/sample', {locations: GMU, q:text}, function(stream){
