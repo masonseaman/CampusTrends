@@ -133,7 +133,7 @@
             access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
             access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
         }); 
-		document.getElementById('showtweets').addEventListener("click", getTweets);
+		
 		function getTweets(){
             var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
             var text = document.getElementById('searchText').getText();
@@ -143,6 +143,8 @@
                     });
                 }
 		}
+        
+        document.getElementById('showtweets').addEventListener("click", getTweets);
 		
 	</script>
 	
