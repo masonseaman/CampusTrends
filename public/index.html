@@ -125,7 +125,7 @@
         var uploader = multer({ storage: multer.memoryStorage({}) });
         var app = express();
         var port = process.env.PORT || 3000;
-        var Twit = require('twit');
+        var Twit = require('ntwitter');
 
         var twit = new Twit({      
             consumer_key: process.env.TWITTER_CONSUMER_KEY,
