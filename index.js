@@ -22,7 +22,15 @@ var twitter = new Twitter(
         "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
         "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET,
     });
-console.log(twitter.getSearch({'q':'#test','count':10},error,success));
+
+function error(){
+    console.log("error");
+}
+
+function success(){
+    console.log("success");
+}
+twitter.getSearch({'q':'#test','count':10},error,success);
 
 /**
  * Google cloud storage part
