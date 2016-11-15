@@ -30,7 +30,8 @@ function error(){
 function success(){
     console.log("success");
 }
-twitter.getSearch({'q':'#test','count':10},error,success);
+
+console.log(twitter.getSearch({'q':'#test','count':10},error,success));
 
 /**
  * Google cloud storage part
