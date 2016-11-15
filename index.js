@@ -12,8 +12,17 @@ firebase.initializeApp({
 });
 
 //twitter
-//end twitter
 
+var Twitter = require('twitter-node-client').Twitter;;
+//end twitter
+var twitter = new Twitter(
+    {
+        "consumerKey": process.env.TWITTER_CONSUMER_KEY,
+        "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
+        "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
+        "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET,
+    });
+console.log(twitter.getSearch({'q':'#test','count':10},error,success));
 
 /**
  * Google cloud storage part
