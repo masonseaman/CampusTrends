@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 
@@ -10,91 +11,42 @@
 
 
 <head>
-
-	
-
 	<meta charset="utf-8">
-
 	<title>CampusTrends</title>
-
 	<div id="creator1" data-creator1="Mason Seaman"></div>
-
 	<div id="creator2" data-creator2="Daniel Morgenthal"></div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-with-addons.js"></script>
     <script src="https://fb.me/react-15.0.0.js"></script>
     <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <!--
     <script type="text/javascript" src="../CampusTrends/jasmine/lib/jasmine-2.5.2/jasmine.js"></script>
     <script type="text/javascript" src="../CampusTrends/jasmine/lib/jasmine-2.5.2/jasmine-html.js"></script>
     <script type="text/javascript" src="../CampusTrends/jasmine/lib/jasmine-2.5.2/boot.js"></script>
     <link rel="stylesheet" type="text/css" href="../CampusTrends/jasmine/lib/jasmine-2.5.2/jasmine.css">
-
+    -->
 </head>
 
 <body>
-
-
-
 	<div>
-
-
-
 		<p>
-
-
-
-			<img alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
-
-
-
+			<img style='height: 100%; width: 100%; object-fit: contain' alt="George Mason University" src="http://beach2016.gmu.edu/GMU.jpeg" />
 			<h1>CampusTrends</h1>
-
-
-
-				<p>
-
-
-
-					<text>
-
-
-
-						CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
-
-
-
-					</text>
-
-
-
-				</p>
-
-
-
+    		<p>
+        		<text>
+        			CampusTrends is a Twitter API based application that produces visualizations of searches on Twitter trends. Using CampusTrends you can search for Twitter keywords and see where and when activity began. The name “CampusTrends” is in reference to the Fairfax GMU Campus, which will be the default location for searches. In comparison to a worldwide trend tracking tool, CampusTrends is concerned with what is trending on a local scale. The timeframe can be increased or decreased to create a range of search dates. Search results will be be stored server-side and recent searches will be shown as suggestions to users.
+        		</text>
+    		</p>
+			<a class="twitter-timeline" href="https://twitter.com/masonseaman">Tweets by masonseaman</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</p>
-
-
-
 	</div>
-
-
-
-
-
-
-
- <div class=search>
-
-
-
+    <div class=search>
 		<p> <input id="searchText" size="75%" type="search" placeholder="Enter keyword to search campus trends"> </p>
-     <div>Show the results for your search around the GMU Campus:</div>
-	<p> <button id="showtweets"> <a>Show Tweets</a></button></p>
-     <div> Show the top three most recent searches:</div>
+        <div>Show the results for your search around the GMU Campus:</div>
+        <p> <button id="showtweets"> <a>Show Tweets</a></button></p>
+        <div> Show the top three most recent searches:</div>
 		<p><button id="show">Show Trends</button></p>
-
-	</div>
+	</div>    
     <p id = "recent">
         Recent Searches:
     </p>
@@ -128,32 +80,30 @@
         var multer = require("multer");
         var uploader = multer({ storage: multer.memoryStorage({}) });
         var app = express();
-        var port = process.env.PORT || 3000;
-        var Twit = require('ntwitter');
-
-        var twit = new Twit({      
-            consumer_key: process.env.TWITTER_CONSUMER_KEY,
-            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-            access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-            access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
-        }); 
-        function test(){
-    		twit.search('nodejs or #node', {}, function(err,data){
-                console.log(data);
+        var port = process.env.PORT || 3000;       
+        var Twitter = require('twitter-node-client').Twitter;;
+        var twitter = new Twitter(
+            {
+                "consumerKey": process.env.TWITTER_CONSUMER_KEY,
+                "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
+                "accessToken": process.env.TWITTER_ACCESS_TOKEN_KEY,
+                "accessTokenSecret": process.env.TWITTER_ACCESS_TOKEN_SECRET,
             });
-        }
-		function getTweets(){
-            var gmu = [ '-122.75', '36.8', '-121.75', '37.8'];
-            var text = document.getElementById('searchText').getText();
-            twit.stream('statuses/sample', {locations: gmu}, function(stream){
-                    stream.on('data', function (data){
-                        console.log(data)
-                    });
-                }
-		}
 
-        document.getElementById('showtweets').addEventListener("click", test);
-		
+        function error(){
+            console.log("error");
+        }
+
+        function success(){
+            console.log("success");
+            document.getElementById('showtweets').addEventListener("click", test);
+            function test(){
+                $("")
+            }
+        }
+
+        var tweets = twitter.getSearch({'q':'#test','count':10},error,success);
+	
 	</script>
 	
 	<script type="text/babel">
